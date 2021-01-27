@@ -21,8 +21,8 @@ func main() {
 	brand := brand.New(db)
 	//fmt.Println(brand.GetById(1))
 
-	ser := service.New(product, brand)
-	h := handler.New(ser)
+	service := service.New(product, brand)
+	h := handler.New(service)
 
 	myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter.HandleFunc("/product/{id}", h.ReturnProductResult)
