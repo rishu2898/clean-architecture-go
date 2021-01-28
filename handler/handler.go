@@ -17,11 +17,31 @@ func New(s service.Service) Handler {
 	return Handler{s}
 }
 
-func (empHandler Handler) ReturnProductResult(w http.ResponseWriter, r *http.Request) {
+type bucket struct {
+	ProductName string	`json:"productName"`
+	BrandName string	`json:"brandName"`
+}
+func (prod Handler) InsertProduct(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		var data bucket
+		err := json.NewDecoder(r.Body).Decode(&data)
+		if err != nil {
+			panic(err)
+		}
+		res, err := prod.s.InsertProduct(data.ProductName, data.BrandName)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		json.NewEncoder(w).Encode(res)
+	}
+}
+
+func (prod Handler) ReturnProductResult(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		vars := mux.Vars(r)
 		key, _ := strconv.Atoi(vars["id"])
-		data, err := empHandler.s.GetProductDetails(key)
+		data, err := prod.s.GetProductDetails(int64(key))
 		if err != nil {
 			log.Fatal(err)
 		}

@@ -1,7 +1,7 @@
 package models
 
 type Product struct {
-	Id int
+	Id int64
 	Name string
-	BrandId int
+	BrandId int64
 }

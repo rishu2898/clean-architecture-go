@@ -35,7 +35,7 @@ func (m *MockStore) EXPECT() *MockStoreMockRecorder {
 }
 
 // GetById mocks base method.
-func (m *MockStore) GetById(id int) (models.Brand, error) {
+func (m *MockStore) GetById(id int64) (models.Brand, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetById", id)
 	ret0, _ := ret[0].(models.Brand)
@@ -49,17 +49,32 @@ func (mr *MockStoreMockRecorder) GetById(id interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*MockStore)(nil).GetById), id)
 }
 
-// InsertBrand mocks base method.
-func (m *MockStore) InsertBrand(prod models.Brand) (int64, error) {
+// GetByName mocks base method.
+func (m *MockStore) GetByName(brandName string) (models.Brand, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "InsertBrand", prod)
+	ret := m.ctrl.Call(m, "GetByName", brandName)
+	ret0, _ := ret[0].(models.Brand)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetByName indicates an expected call of GetByName.
+func (mr *MockStoreMockRecorder) GetByName(brandName interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByName", reflect.TypeOf((*MockStore)(nil).GetByName), brandName)
+}
+
+// InsertBrand mocks base method.
+func (m *MockStore) InsertBrand(name string) (int64, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "InsertBrand", name)
 	ret0, _ := ret[0].(int64)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // InsertBrand indicates an expected call of InsertBrand.
-func (mr *MockStoreMockRecorder) InsertBrand(prod interface{}) *gomock.Call {
+func (mr *MockStoreMockRecorder) InsertBrand(name interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InsertBrand", reflect.TypeOf((*MockStore)(nil).InsertBrand), prod)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InsertBrand", reflect.TypeOf((*MockStore)(nil).InsertBrand), name)
 }

@@ -25,7 +25,9 @@ func main() {
 	h := handler.New(service)
 
 	myRouter := mux.NewRouter().StrictSlash(true)
-	myRouter.HandleFunc("/product/{id}", h.ReturnProductResult)
+	myRouter.HandleFunc("/product/{id}", h.ReturnProductResult).Methods("GET")
+	myRouter.HandleFunc("/product/insert", h.InsertProduct).Methods("POST")
+
 	log.Fatal(http.ListenAndServe(":8000", myRouter))
 	defer db.Close()
 }

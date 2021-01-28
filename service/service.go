@@ -4,6 +4,7 @@ import (
 	"Project_store/models"
 	"Project_store/store/brand"
 	"Project_store/store/product"
+	"errors"
 	"fmt"
 )
 
@@ -15,8 +16,34 @@ type Result struct {
 func New(p product.Store, b brand.Store) Service {
 	return &Result{p, b}
 }
-
-func (s Result) GetProductDetails(id int) (models.Result, error) {
+func (s Result) InsertProduct(productName string, brandName string) (models.Result, error) {
+	brand, err := s.b.GetByName(brandName)
+	var bid int64
+	bflag, pflag := false, false
+	if err != nil {
+		bid, err = s.b.InsertBrand(brandName)
+		brand.Id = bid
+		brand.Name = brandName
+		bflag = true
+	}
+	product, err := s.p.GetByName(productName)
+	if err != nil {
+		product.BrandId = bid
+		product.Name = productName
+		pid, _ := s.p.InsertProduct(product)
+		product.Id = pid
+		pflag = true
+	}
+	if pflag == true && bflag == true {
+		return models.Result{}, errors.New("product and brand is already present")
+	}
+	var data models.Result
+	data.Id = product.Id
+	data.Name = product.Name
+	data.Bname = brand.Name
+	return data, nil
+}
+func (s Result) GetProductDetails(id int64) (models.Result, error) {
 	var res models.Result
 	productResult, err := s.p.GetById(id)
 	if err != nil {
