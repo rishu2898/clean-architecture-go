@@ -1,4 +1,5 @@
 package brand
+
 import (
 	"Project_store/models"
 	"database/sql"
@@ -15,7 +16,7 @@ func New(db *sql.DB) Store {
 
 func (prod brand) GetById(id int) (models.Brand, error) {
 
-	rows, err := prod.db.Query("SELECT id, name, FROM brand where id = ?", id)
+	rows, err := prod.db.Query("SELECT id, name FROM brand WHERE id = ?", id)
 
 	if err != nil {
 		return models.Brand{}, err

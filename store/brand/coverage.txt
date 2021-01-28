@@ -1,0 +1,11 @@
+mode: set
+Project_store/store/brand/mock_interface.go:26.55,30.2 3 0
+Project_store/store/brand/mock_interface.go:33.53,35.2 1 0
+Project_store/store/brand/mock_interface.go:38.59,44.2 5 0
+Project_store/store/brand/mock_interface.go:47.71,50.2 2 0
+Project_store/store/brand/store.go:12.28,14.2 1 0
+Project_store/store/brand/store.go:16.57,20.16 2 1
+Project_store/store/brand/store.go:24.2,27.18 3 1
+Project_store/store/brand/store.go:30.2,30.20 1 1
+Project_store/store/brand/store.go:20.16,22.3 1 0
+Project_store/store/brand/store.go:27.18,29.3 1 1
