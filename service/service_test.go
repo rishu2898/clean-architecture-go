@@ -5,7 +5,6 @@ import (
 	"Project_store/store/brand"
 	"Project_store/store/product"
 	"errors"
-	"fmt"
 	"github.com/golang/mock/gomock"
 	"log"
 	"testing"
@@ -38,7 +37,7 @@ func TestGetById(t *testing.T) {
 		{},
 	}
 	testcases := []struct {
-		id int
+		id int64
 		prod models.Product
 		br models.Brand
 		expected models.Result
@@ -57,11 +56,9 @@ func TestGetById(t *testing.T) {
 		}
 		ans, err := psr.GetProductDetails(tc.id)
 		if err != tc.err {
-			fmt.Println("i am here")
 			log.Fatal(err)
 		}
 		if ans != tc.expected {
-			fmt.Println("i am not here")
 			log.Fatal(err)
 		}
 	}
