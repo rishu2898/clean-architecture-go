@@ -20,7 +20,7 @@ func (prod product) GetById(id int) (models.Product, error) {
 		rows *sql.Rows
 		err  error
 	)
-	rows, err = prod.db.Query("SELECT id, name, bid, FROM product where id = ?", id)
+	rows, err = prod.db.Query("SELECT id, name, bid FROM product WHERE id = ?", id)
 
 	if err != nil {
 		return models.Product{}, err
