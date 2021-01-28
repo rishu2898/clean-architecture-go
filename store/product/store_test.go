@@ -63,3 +63,27 @@ func TestGetByIdErr(t *testing.T) {
 		}
 	}
 }
+
+
+// function for testing insert product into product table
+func TestInsertProduct(t *testing.T) {
+	db, mock, err := sqlmock.New()
+	if err != nil {
+		fmt.Println("error creating mock database")
+	}
+	defer db.Close()
+
+	brandHandler := New(db)
+	testcases := []models.Product {
+		{1, "levis", 1},
+		{2, "puma", 2},
+	}
+	for _, tc := range testcases {
+		query := "INSERT INTO product"
+		mock.ExpectExec(query).WithArgs(tc.Id, tc.Name, tc.BrandId).WillReturnResult(sqlmock.NewResult(int64(tc.Id), 1))
+		res, err := brandHandler.InsertProduct(tc)
+		if err != nil || res != int64(tc.Id) {
+			log.Fatal(err)
+		}
+	}
+}
