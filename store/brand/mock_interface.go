@@ -48,3 +48,18 @@ func (mr *MockStoreMockRecorder) GetById(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*MockStore)(nil).GetById), id)
 }
+
+// InsertBrand mocks base method.
+func (m *MockStore) InsertBrand(prod models.Brand) (int64, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "InsertBrand", prod)
+	ret0, _ := ret[0].(int64)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// InsertBrand indicates an expected call of InsertBrand.
+func (mr *MockStoreMockRecorder) InsertBrand(prod interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InsertBrand", reflect.TypeOf((*MockStore)(nil).InsertBrand), prod)
+}
