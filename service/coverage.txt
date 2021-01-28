@@ -1,0 +1,7 @@
+mode: set
+Project_store/service/service.go:15.50,17.2 1 1
+Project_store/service/service.go:19.66,22.16 3 1
+Project_store/service/service.go:26.2,30.16 4 1
+Project_store/service/service.go:33.2,35.17 3 1
+Project_store/service/service.go:22.16,25.3 2 1
+Project_store/service/service.go:30.16,32.3 1 0

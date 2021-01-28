@@ -26,10 +26,7 @@ func (s Result) GetProductDetails(id int) (models.Result, error) {
 	res.Id = productResult.Id
 	res.Name = productResult.Name
 
-	brandResult, err := s.b.GetById(productResult.BrandId)
-	if err != nil {
-		fmt.Println("id not found")
-	}
+	brandResult, _ := s.b.GetById(productResult.BrandId)
 	res.Bname = brandResult.Name
 	fmt.Println(res)
 	return res, nil
