@@ -5,13 +5,14 @@ import (
 	"Project_store/store/brand"
 	"Project_store/store/product"
 	"errors"
-	"fmt"
 )
 
 type Result struct {
 	p product.Store
 	b brand.Store
 }
+
+
 
 func New(p product.Store, b brand.Store) Service {
 	return &Result{p, b}
@@ -21,7 +22,7 @@ func (s Result) InsertProduct(productName string, brandName string) (models.Resu
 	var bid int64
 	bflag, pflag := false, false
 	if err != nil {
-		bid, err = s.b.InsertBrand(brandName)
+		bid, _ = s.b.InsertBrand(brandName)
 		brand.Id = bid
 		brand.Name = brandName
 		bflag = true
@@ -47,7 +48,6 @@ func (s Result) GetProductDetails(id int64) (models.Result, error) {
 	var res models.Result
 	productResult, err := s.p.GetById(id)
 	if err != nil {
-		fmt.Println("id not found")
 		return models.Result{}, err
 	}
 	res.Id = productResult.Id
@@ -55,6 +55,5 @@ func (s Result) GetProductDetails(id int64) (models.Result, error) {
 
 	brandResult, _ := s.b.GetById(productResult.BrandId)
 	res.Bname = brandResult.Name
-	fmt.Println(res)
 	return res, nil
 }
