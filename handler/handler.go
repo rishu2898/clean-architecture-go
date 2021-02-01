@@ -3,6 +3,7 @@ package handler
 import (
 	"Project_store/service"
 	"encoding/json"
+	"fmt"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
@@ -25,6 +26,7 @@ func (prod Handler) InsertProduct(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		var data bucket
 		err := json.NewDecoder(r.Body).Decode(&data)
+		fmt.Println(data)
 		if err != nil {
 			panic(err)
 		}
@@ -33,6 +35,7 @@ func (prod Handler) InsertProduct(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
+		w.WriteHeader(http.StatusCreated)
 		json.NewEncoder(w).Encode(res)
 	}
 }

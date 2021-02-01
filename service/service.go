@@ -2,19 +2,16 @@ package service
 
 import (
 	"Project_store/models"
-	"Project_store/store/brand"
-	"Project_store/store/product"
+	"Project_store/store"
 	"errors"
 )
 
 type Result struct {
-	p product.Store
-	b brand.Store
+	p store.ProductStore
+	b store.BrandStore
 }
 
-
-
-func New(p product.Store, b brand.Store) Service {
+func New(p store.ProductStore, b store.BrandStore) Service {
 	return &Result{p, b}
 }
 func (s Result) InsertProduct(productName string, brandName string) (models.Result, error) {

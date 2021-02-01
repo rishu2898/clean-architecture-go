@@ -2,8 +2,7 @@ package service
 
 import (
 	"Project_store/models"
-	"Project_store/store/brand"
-	"Project_store/store/product"
+	"Project_store/store"
 	"errors"
 	"github.com/golang/mock/gomock"
 	"log"
@@ -12,8 +11,8 @@ import (
 
 func TestGetById(t *testing.T) {
 	ctrl := gomock.NewController(t)
-	ps := product.NewMockStore(ctrl)
-	bs := brand.NewMockStore(ctrl)
+	ps := store.NewMockProductStore(ctrl)
+	bs := store.NewMockBrandStore(ctrl)
 	psr := New(ps, bs)
 
 	product := []models.Product{
@@ -67,8 +66,8 @@ func TestGetById(t *testing.T) {
 func TestResult_InsertProduct(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
-	ps := product.NewMockStore(ctrl)
-	bs := brand.NewMockStore(ctrl)
+	ps := store.NewMockProductStore(ctrl)
+	bs := store.NewMockBrandStore(ctrl)
 	psr := New(ps, bs)
 
 	testcases := []struct {
