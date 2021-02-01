@@ -47,7 +47,6 @@ func (prod product) InsertProduct(val models.Product) (int64, error) {
 	res, _ := prod.db.Exec("INSERT INTO product(name, bid) VALUES(?, ?)", val.Name, val.BrandId)
 	lid, err := res.LastInsertId()
 	if err != nil {
-		fmt.Println("record not inserted")
 		return -1, err
 	}
 	return lid, nil

@@ -3,7 +3,6 @@ package brand
 import (
 	"Project_store/models"
 	"database/sql"
-	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -46,7 +45,6 @@ func (prod brand) InsertBrand(val string) (int64, error) {
 	res, _ := prod.db.Exec("INSERT INTO brand(name) VALUES(?)", val)
 	lid, err := res.LastInsertId()
 	if err != nil {
-		fmt.Println("record not inserted")
 		return -1, err
 	}
 	return lid, nil
