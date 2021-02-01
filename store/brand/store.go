@@ -2,6 +2,7 @@ package brand
 
 import (
 	"Project_store/models"
+	"Project_store/store"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -10,7 +11,7 @@ type brand struct {
 	db *sql.DB
 }
 
-func New(db *sql.DB) Store {
+func New(db *sql.DB) store.BrandStore {
 	return brand{db}
 }
 

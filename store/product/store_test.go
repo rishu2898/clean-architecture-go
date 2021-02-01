@@ -47,7 +47,7 @@ func TestGetByIdErr(t *testing.T) {
 
 	brandHandler := New(db)
 	testcases := []struct {
-		id  int
+		id  int64
 		err string
 	}{
 		{0, "invlaid id"},
@@ -80,7 +80,7 @@ func TestInsertProduct(t *testing.T) {
 	}
 	for _, tc := range testcases {
 		query := "INSERT INTO product"
-		mock.ExpectExec(query).WithArgs(tc.Id, tc.Name, tc.BrandId).WillReturnResult(sqlmock.NewResult(int64(tc.Id), 1))
+		mock.ExpectExec(query).WithArgs(tc.Name, tc.BrandId).WillReturnResult(sqlmock.NewResult(int64(tc.Id), 1))
 		res, err := brandHandler.InsertProduct(tc)
 		if err != nil || res != int64(tc.Id) {
 			log.Fatal(err)
